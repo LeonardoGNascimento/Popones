@@ -15,24 +15,21 @@ function Decrypt() {
 const cryptpru = (phrase) => {
   return phrase
     .split(" ")
-    .map((word) => {
-      const wordLetters = word.split("");
-      return wordLetters
-        .map((letter, index) => {
-          const charCode = letter.charCodeAt(0);
-          const binary = charCode.toString(2).padStart(8, 0);
-          const prus = binary
-            .replace(/0/g, "po, ")
-            .replace(/1/g, "popo, ")
-            .replace(/, $/, "");
-
-          return prus;
-        })
-        .join("-");
-    })
+    .map((word) =>
+      word
+        .split("")
+        .map((letter) =>
+          letter
+            .charCodeAt(0)
+            .toString(2)
+            .padStart(8, "0")
+            .replace(/0/g, "po")
+            .replace(/1/g, "popo")
+        )
+        .join("-")
+    )
     .join("~");
 };
-
 const decryptpru = (prurase) => {
   return prurase
     .split("~")
